@@ -1,0 +1,3 @@
+{ namaka }:
+
+namaka

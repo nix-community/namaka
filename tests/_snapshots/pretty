@@ -1,0 +1,4 @@
+#pretty
+{
+  load = <function, args: {dir?, flake}>;
+}
