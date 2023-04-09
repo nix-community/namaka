@@ -14,6 +14,8 @@ namaka check # run checks
 namaka review # review pending snapshots
 ```
 
+![](https://user-images.githubusercontent.com/40620903/230751675-b1eb1076-bcd8-4c21-a420-f4c914716bb9.gif)
+
 ## Usage
 
 ```
