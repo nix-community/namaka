@@ -59,5 +59,5 @@ with the exception of `src`, which always gets overwritten (ignored).
   a snapshot testing tool for Rust.
 - Namaka is based on [haumea], which also has some testing functionalities.
 
-`haumea`: https://github.com/nix-community/haumea
-`haumea.load`: https://github.com/nix-community/haumea#load
+[haumea]: https://github.com/nix-community/haumea
+[`haumea.load`]: https://github.com/nix-community/haumea#load
