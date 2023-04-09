@@ -42,7 +42,7 @@ Arguments:
 - (optional) `dir` : `String`
 
   Path to the testing directory relative to `flake`, defaults to `tests`.
-  `${flake}/${dir}` to [`haumea.load`]'s `src` option.
+  `${flake}/${dir}` is passed to [`haumea.load`]'s `src` option.
 
 Wrapper around [`haumea.load`] to loads snapshot tests from a directory.
 See [tests](tests) for how the directory should be structured.
