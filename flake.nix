@@ -45,6 +45,11 @@
 
       formatter = eachSystem (pkgs: pkgs.nixpkgs-fmt);
 
+      herculesCI.ciSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
       lib = haumea.lib.load {
         src = ./nix;
         inputs = {
