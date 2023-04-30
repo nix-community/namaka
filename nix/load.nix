@@ -4,27 +4,39 @@ let
   inherit (builtins)
     attrNames
     concatStringsSep
+    filter
     mapAttrs
     pathExists
     readFile
+    storeDir
+    tail
     toJSON
     trace
     tryEval
     ;
   inherit (lib)
-    flip
     filterAttrs
+    flip
     hasPrefix
     id
+    pipe
     removePrefix
+    splitString
+    warn
     ;
 in
 
-{ flake, dir ? "tests", ... }@args:
+args:
 
 let
+  src = toString (
+    args.src or (warn
+      "namaka.load: `flake` and `dir` options has been deprecated, use `src` directly instead"
+      (args.flake + "/${args.dir or "tests"}"))
+  );
+
   tests = haumea.load (removeAttrs args [ "flake" "dir" ] // {
-    src = flake + "/${dir}";
+    inherit src;
   });
 
   results = flip mapAttrs tests (name: { format ? "json", expr }:
@@ -32,7 +44,7 @@ let
       -> throw "invalid snapshot '${name}', names should not start with '.'";
 
     let
-      path = flake + "/${dir}/_snapshots/${name}";
+      path = "${src}/_snapshots/${name}";
       old = pathExists path;
       snap = readFile path;
       prefix = "#${format}\n";
@@ -48,10 +60,21 @@ let
       inherit format value old;
     });
 
+  msg = {
+    dir = pipe src [
+      (removePrefix storeDir)
+      (splitString "/")
+      (filter (x: x != ""))
+      tail
+      (concatStringsSep "/")
+    ];
+    inherit results;
+  };
+
   failures = attrNames (filterAttrs (_: res: res ? value) results);
 in
 
-assert trace "namaka=${toJSON { inherit dir results; }}" true;
+assert trace "namaka=${toJSON msg}" true;
 
 if failures == [ ] then
   { }

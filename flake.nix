@@ -37,7 +37,7 @@
     in
     {
       checks = self.lib.load {
-        flake = self;
+        src = ./tests;
         inputs = {
           namaka = self.lib;
         };
