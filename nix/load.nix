@@ -31,7 +31,7 @@ args:
 let
   src = toString (
     args.src or (warn
-      "namaka.load: `flake` and `dir` options has been deprecated, use `src` directly instead"
+      "namaka.load: `flake` and `dir` have been deprecated, use `src` directly instead"
       (args.flake + "/${args.dir or "tests"}"))
   );
 
