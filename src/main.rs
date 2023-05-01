@@ -12,7 +12,7 @@ use similar::{ChangeTag, TextDiff};
 
 use std::{
     ffi::OsStr,
-    fs::{self, create_dir_all, read_dir, remove_dir_all, File},
+    fs::{self, canonicalize, create_dir_all, read_dir, remove_dir_all, File},
     io::{self, stderr, BufRead, Write},
     path::{Path, PathBuf},
     process::{exit, Command, Output},
@@ -180,7 +180,7 @@ fn run_check(dir: &Option<PathBuf>) -> io::Result<Output> {
         .arg("flakes nix-command");
 
     if let Some(dir) = dir {
-        cmd.arg(dir);
+        cmd.arg(canonicalize(dir)?);
     }
 
     cmd.output()
