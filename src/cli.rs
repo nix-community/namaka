@@ -1,6 +1,6 @@
 use clap::Parser;
 
-use std::path::PathBuf;
+use std::{ffi::OsString, path::PathBuf};
 
 /// Snapshot testing tool for Nix based on haumea
 /// https://github.com/nix-community/namaka
@@ -8,7 +8,13 @@ use std::path::PathBuf;
 #[command(version, verbatim_doc_comment)]
 pub struct Opts {
     #[command(subcommand)]
-    pub cmd: Subcommand,
+    pub subcmd: Subcommand,
+
+    /// Command to run instead of `nix flake check`
+    ///
+    /// Example: namaka check -c nix eval .#checks
+    #[arg(short, long, num_args = 1 .., global = true)]
+    pub cmd: Option<Vec<OsString>>,
 }
 
 #[derive(clap::Subcommand)]
