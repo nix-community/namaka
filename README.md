@@ -47,9 +47,9 @@ Options:
 
 Type: `{ ... } -> { }`
 
-Wrapper around [`haumea.load`] to loads snapshot tests from a directory.
+Wrapper around [`haumea.load`] to load snapshot tests from a directory.
 
-It throws an error if any tests fail, otherwise it will always return `{ }`.
+It throws an error if any of the tests fail, otherwise it always returns `{ }`.
 `load { src = ./tests; }` will load tests from the `tests` directory,
 which should be structured like this:
 
