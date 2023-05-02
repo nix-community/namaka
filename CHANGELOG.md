@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.1.1
+## v0.1.1 - 2023-05-02
 
 ## Features
 
