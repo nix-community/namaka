@@ -57,9 +57,9 @@ which should be structured like this:
 tests
 ├─ foo/
 │  ├─ expr.nix
-├─ bar/
-│  ├─ expr.nix
-│  └─ format.nix (optional)
+└─ bar/
+   ├─ expr.nix
+   └─ format.nix (optional)
 ```
 
 `expr.nix` contains the Nix expression you want to test.
