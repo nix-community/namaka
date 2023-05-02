@@ -114,7 +114,7 @@
         };
         minimal = {
           path = ./templates/minimal;
-          description = "A Nix library that does not depend on the entirety nixpkgs";
+          description = "A Nix library that does not depend on the entirety of nixpkgs";
         };
       };
     };
