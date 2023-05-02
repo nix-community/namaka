@@ -1,6 +1,6 @@
 [package]
 name = "namaka"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["figsoda <figsoda@pm.me>"]
 edition = "2021"
 description = "Snapshot testing for Nix based on haumea"
@@ -29,11 +29,11 @@ default-features = false
 features = ["regex-onig"]
 
 [dependencies.clap]
-version = "4.2.5"
+version = "4.2.7"
 features = ["cargo", "derive", "unicode", "wrap_help"]
 
 [build-dependencies]
-clap = { version = "4.2.5", features = ["derive", "string"] }
+clap = { version = "4.2.7", features = ["derive", "string"] }
 clap_complete = "4.2.1"
 clap_mangen = "0.2.10"
 
