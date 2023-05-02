@@ -31,8 +31,8 @@
 
       src = sourceByRegex self [
         "src(/.*)?"
-        "Cargo\\.(toml|lock)"
-        "build\\.rs"
+        ''Cargo\.(toml|lock)''
+        ''build\.rs''
       ];
     in
     {
