@@ -2,16 +2,16 @@
 
 ## v0.1.1 - 2023-05-02
 
-## Features
+### Features
 
 - load: accept `src`
 - cli: allow running commands other than `nix flake check`
 
-## Changes
+### Changes
 
 - load: deprecate `flake` and `dir`
 
-## Fixes
+### Fixes
 
 - load: fix json format when values are implicitly casted
 - canonicalize path before running `nix flake check`
