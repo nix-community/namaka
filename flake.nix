@@ -1,5 +1,5 @@
 {
-  description = "Snapshot testing tool for Nix based on haumea";
+  description = "Snapshot testing for Nix based on haumea";
 
   inputs = {
     haumea = {
@@ -106,5 +106,16 @@
             };
           };
         });
+
+      templates = {
+        default = {
+          path = ./templates/default;
+          description = "A Nix library";
+        };
+        minimal = {
+          path = ./templates/minimal;
+          description = "A Nix library that does not depend on the entirety nixpkgs";
+        };
+      };
     };
 }

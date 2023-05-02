@@ -2,7 +2,7 @@ use clap::Parser;
 
 use std::{ffi::OsString, path::PathBuf};
 
-/// Snapshot testing tool for Nix based on haumea
+/// Snapshot testing for Nix based on haumea
 /// https://github.com/nix-community/namaka
 #[derive(Parser)]
 #[command(version, verbatim_doc_comment)]
