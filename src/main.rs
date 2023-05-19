@@ -1,4 +1,5 @@
 mod cli;
+mod nix;
 mod snapshot;
 
 use clap::Parser;
@@ -11,15 +12,16 @@ use serde::Deserialize;
 use similar::{ChangeTag, TextDiff};
 
 use std::{
-    ffi::{OsStr, OsString},
-    fs::{self, canonicalize, create_dir_all, read_dir, remove_dir_all, File},
+    ffi::OsStr,
+    fs::{self, create_dir_all, read_dir, remove_dir_all, File},
     io::{stderr, BufRead, Write},
     path::{Path, PathBuf},
-    process::{exit, Command, Output},
+    process::exit,
 };
 
 use crate::{
     cli::{Opts, Subcommand},
+    nix::{eval_checks, run_checks},
     snapshot::Snapshot,
 };
 
@@ -46,7 +48,7 @@ fn main() -> Result<()> {
 
     match opts.subcmd {
         Subcommand::Check { dir } => {
-            let output = run_check(&dir, opts.cmd)?;
+            let output = run_checks(&dir, opts.cmd)?;
             let success = output.status.success();
             for line in output.stderr.lines() {
                 let line = line?;
@@ -101,7 +103,7 @@ fn main() -> Result<()> {
         }
 
         Subcommand::Review { dir } => {
-            let output = run_check(&dir, opts.cmd)?;
+            let output = eval_checks(&dir, opts.cmd)?;
             for line in output.stderr.lines() {
                 let line = line?;
                 let Some(line) = line.strip_prefix("trace: namaka=") else {
@@ -169,28 +171,6 @@ fn main() -> Result<()> {
             stderr().write_all(&output.stderr)?;
             Err(eyre!("unknown error"))
         }
-    }
-}
-
-fn run_check(dir: &Option<PathBuf>, cmd: Option<Vec<OsString>>) -> Result<Output> {
-    if let Some(cmd) = cmd {
-        let mut cmd = cmd.iter();
-        Command::new(cmd.next().ok_or_else(|| eyre!("no command"))?)
-            .args(cmd)
-            .output()
-            .map_err(Into::into)
-    } else {
-        let mut cmd = Command::new("nix");
-        cmd.arg("flake")
-            .arg("check")
-            .arg("--extra-experimental-features")
-            .arg("flakes nix-command");
-
-        if let Some(dir) = dir {
-            cmd.arg(canonicalize(dir)?);
-        }
-
-        cmd.output().map_err(Into::into)
     }
 }
 
