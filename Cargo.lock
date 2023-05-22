@@ -176,9 +176,9 @@ dependencies = [
 
 [[package]]
 name = "bstr"
-version = "1.4.0"
+version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3d4260bcc2e8fc9df1eac4919a720effeb63a3f0952f5bf4944adfa18897f09"
+checksum = "a246e68bb43f6cd9db24bea052a53e40405417c5fb372e3d1a8a7f770a564ef5"
 dependencies = [
  "memchr",
  "once_cell",
@@ -534,7 +534,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "029d74589adefde59de1a0c4f4732695c32805624aec7b68d91503d4dba79afc"
 dependencies = [
  "aho-corasick 0.7.20",
- "bstr 1.4.0",
+ "bstr 1.5.0",
  "fnv",
  "log",
  "regex",
@@ -704,7 +704,7 @@ name = "namaka"
 version = "0.1.1"
 dependencies = [
  "bat",
- "bstr 1.4.0",
+ "bstr 1.5.0",
  "clap",
  "clap_complete",
  "clap_mangen",
