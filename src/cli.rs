@@ -21,7 +21,7 @@ pub struct Opts {
     pub dir: Option<PathBuf>,
 }
 
-#[derive(Clone, Copy, clap::Subcommand)]
+#[derive(clap::Subcommand)]
 pub enum Subcommand {
     /// Wrapper around `nix flake check` to prepare snapshots for failed tests
     #[command(visible_alias = "c")]
