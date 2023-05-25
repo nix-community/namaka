@@ -1,0 +1,2 @@
+[check]
+cmd = ["nix", "eval", ".#checks"]

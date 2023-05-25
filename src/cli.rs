@@ -15,20 +15,18 @@ pub struct Opts {
     /// Example: namaka check -c nix eval .#checks
     #[arg(short, long, num_args = 1 .., global = true)]
     pub cmd: Option<Vec<OsString>>,
+
+    /// Change to this working directory
+    #[arg(global = true)]
+    pub dir: Option<PathBuf>,
 }
 
-#[derive(clap::Subcommand)]
+#[derive(Clone, Copy, clap::Subcommand)]
 pub enum Subcommand {
     /// Wrapper around `nix flake check` to prepare snapshots for failed tests
     #[command(visible_alias = "c")]
-    Check {
-        /// Path to the Nix flake
-        dir: Option<PathBuf>,
-    },
+    Check,
     /// Review pending snapshots and selectively accept or reject them
     #[command(visible_alias = "r")]
-    Review {
-        /// Path to the Nix flake
-        dir: Option<PathBuf>,
-    },
+    Review,
 }

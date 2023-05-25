@@ -1,5 +1,6 @@
+mod cfg;
 mod cli;
-mod nix;
+mod cmd;
 mod snapshot;
 
 use clap::Parser;
@@ -12,6 +13,7 @@ use serde::Deserialize;
 use similar::{ChangeTag, TextDiff};
 
 use std::{
+    env::set_current_dir,
     ffi::OsStr,
     fs::{self, create_dir_all, read_dir, remove_dir_all, File},
     io::{stderr, BufRead, Write},
@@ -21,7 +23,7 @@ use std::{
 
 use crate::{
     cli::{Opts, Subcommand},
-    nix::{eval_checks, run_checks},
+    cmd::run,
     snapshot::Snapshot,
 };
 
@@ -43,12 +45,29 @@ enum TestResult {
 }
 
 fn main() -> Result<()> {
-    let opts = Opts::parse();
     let _ = color_eyre::install();
 
+    let opts = Opts::parse();
+    if let Some(dir) = opts.dir {
+        set_current_dir(dir)?;
+    }
+
+    let cfg = cfg::load()?;
+
     match opts.subcmd {
-        Subcommand::Check { dir } => {
-            let output = run_checks(&dir, opts.cmd)?;
+        Subcommand::Check => {
+            let output = run(
+                opts.cmd,
+                (|| cfg?.check?.cmd)(),
+                "nix",
+                [
+                    "flake",
+                    "check",
+                    "--extra-experimental-features",
+                    "flakes nix-command",
+                ],
+            )?;
+
             let success = output.status.success();
             for line in output.stderr.lines() {
                 let line = line?;
@@ -58,11 +77,7 @@ fn main() -> Result<()> {
 
                 let output = serde_json::from_str::<TestOutput>(line)?;
 
-                let pending = dir
-                    .unwrap_or_else(|| ".".into())
-                    .join(output.dir)
-                    .join("_snapshots")
-                    .join(".pending");
+                let pending = output.dir.join("_snapshots").join(".pending");
                 let _ = remove_dir_all(&pending);
                 create_dir_all(&pending)?;
                 fs::write(pending.join(".gitignore"), "*")?;
@@ -102,8 +117,19 @@ fn main() -> Result<()> {
             Err(eyre!("unknown error"))
         }
 
-        Subcommand::Review { dir } => {
-            let output = eval_checks(&dir, opts.cmd)?;
+        Subcommand::Review => {
+            let output = run(
+                opts.cmd,
+                (|| cfg?.eval?.cmd)(),
+                "nix",
+                [
+                    "eval",
+                    ".#checks",
+                    "--extra-experimental-features",
+                    "flakes nix-command",
+                ],
+            )?;
+
             for line in output.stderr.lines() {
                 let line = line?;
                 let Some(line) = line.strip_prefix("trace: namaka=") else {
@@ -111,10 +137,7 @@ fn main() -> Result<()> {
                 };
 
                 let output = serde_json::from_str::<TestOutput>(line)?;
-                let snapshots = dir
-                    .unwrap_or_else(|| ".".into())
-                    .join(output.dir)
-                    .join("_snapshots");
+                let snapshots = output.dir.join("_snapshots");
 
                 for entry in read_dir(snapshots.join(".pending"))? {
                     use bstr::ByteSlice;
