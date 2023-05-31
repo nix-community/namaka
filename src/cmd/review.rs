@@ -13,22 +13,12 @@ use std::{
 use crate::{
     cfg::Config,
     cli::Opts,
-    cmd::run,
+    cmd::run::nix_eval,
     proto::{Snapshot, TestOutput},
 };
 
 pub fn review(opts: Opts, cfg: Option<Config>) -> Result<()> {
-    let output = run(
-        opts.cmd,
-        (|| cfg?.eval?.cmd)(),
-        "nix",
-        [
-            "eval",
-            ".#checks",
-            "--extra-experimental-features",
-            "flakes nix-command",
-        ],
-    )?;
+    let output = nix_eval(opts, cfg)?;
 
     for line in output.stderr.lines() {
         let line = line?;

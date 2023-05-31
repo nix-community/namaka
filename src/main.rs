@@ -10,7 +10,7 @@ use std::env::set_current_dir;
 
 use crate::{
     cli::{Opts, Subcommand},
-    cmd::{check, review},
+    cmd::{check, clean, review},
 };
 
 fn main() -> Result<()> {
@@ -25,6 +25,7 @@ fn main() -> Result<()> {
 
     match opts.subcmd {
         Subcommand::Check => check(opts, cfg),
+        Subcommand::Clean => clean(opts, cfg),
         Subcommand::Review => review(opts, cfg),
     }
 }

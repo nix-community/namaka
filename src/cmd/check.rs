@@ -10,24 +10,14 @@ use std::{
 use crate::{
     cfg::Config,
     cli::Opts,
-    cmd::run,
+    cmd::run::nix_check,
     proto::{TestOutput, TestResult},
 };
 
 pub fn check(opts: Opts, cfg: Option<Config>) -> Result<()> {
-    let output = run(
-        opts.cmd,
-        (|| cfg?.check?.cmd)(),
-        "nix",
-        [
-            "flake",
-            "check",
-            "--extra-experimental-features",
-            "flakes nix-command",
-        ],
-    )?;
-
+    let output = nix_check(opts, cfg)?;
     let success = output.status.success();
+
     for line in output.stderr.lines() {
         let line = line?;
         let Some(line) = line.strip_prefix("trace: namaka=") else {
