@@ -1,3 +1,9 @@
+mod check;
+mod review;
+
+pub use check::check;
+pub use review::review;
+
 use eyre::{eyre, Result};
 
 use std::{
