@@ -26,7 +26,7 @@ pub enum Subcommand {
     /// Wrapper around `nix flake check` to prepare snapshots for failed tests
     #[command(visible_alias = "c")]
     Check,
-    /// Removed unused and pending snapshots
+    /// Remove unused and pending snapshots
     #[command(visible_alias = "cl")]
     Clean,
     /// Review pending snapshots and selectively accept or reject them
