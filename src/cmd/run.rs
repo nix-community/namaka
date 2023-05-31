@@ -1,10 +1,11 @@
 use eyre::{eyre, Result};
 
-use crate::{cfg::Config, cli::Opts};
 use std::{
     ffi::{OsStr, OsString},
     process::{Command, Output},
 };
+
+use crate::{cfg::Config, cli::Opts};
 
 pub fn nix_check(opts: Opts, cfg: Option<Config>) -> Result<Output> {
     run(

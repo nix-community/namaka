@@ -1,10 +1,9 @@
 use eyre::{eyre, Result};
 use owo_colors::OwoColorize;
-use std::io::Write;
 
 use std::{
     fs::{read_dir, remove_dir_all, remove_file},
-    io::{stderr, BufRead},
+    io::{stderr, BufRead, Write},
 };
 
 use crate::{cfg::Config, cli::Opts, cmd::run::nix_eval, proto::TestOutput};
