@@ -24,11 +24,11 @@ pub fn nix_check(opts: Opts, cfg: Option<Config>) -> Result<Output> {
 pub fn nix_eval(opts: Opts, cfg: Option<Config>) -> Result<Output> {
     run(
         opts.cmd,
-        (|| cfg?.check?.cmd)(),
+        (|| cfg?.eval?.cmd)(),
         "nix",
         [
-            "flake",
-            "check",
+            "eval",
+            ".#checks",
             "--extra-experimental-features",
             "flakes nix-command",
         ],
