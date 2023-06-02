@@ -116,6 +116,10 @@
           path = ./templates/minimal;
           description = "A Nix library that uses nixpkgs.lib instead of the entire nixpkgs";
         };
+        subflake = {
+          path = ./templates/subflake;
+          description = "A Nix library that uses namaka in a subflake";
+        };
       };
     };
 }
