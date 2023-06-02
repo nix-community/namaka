@@ -3,7 +3,7 @@
 
   inputs = {
     haumea = {
-      url = "github:nix-community/haumea/v0.2.1";
+      url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
