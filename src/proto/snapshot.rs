@@ -1,13 +1,13 @@
+use std::{
+    fs::File,
+    io::{BufRead, BufReader, Read, Write},
+};
+
 use bat::PrettyPrinter;
 use eyre::{eyre, Result};
 use owo_colors::OwoColorize;
 use serde::Deserialize;
 use serde_json::Value;
-
-use std::{
-    fs::File,
-    io::{BufRead, BufReader, Read, Write},
-};
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "kebab-case", tag = "format", content = "value")]

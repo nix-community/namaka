@@ -1,11 +1,11 @@
-use eyre::{eyre, Result};
-use owo_colors::OwoColorize;
-
 use std::{
     fs::{self, create_dir_all, remove_dir_all, File},
     io::{stderr, BufRead, Write},
     process::exit,
 };
+
+use eyre::{eyre, Result};
+use owo_colors::OwoColorize;
 
 use crate::{
     cfg::Config,

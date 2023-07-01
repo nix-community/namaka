@@ -3,10 +3,10 @@ mod cli;
 mod cmd;
 mod proto;
 
+use std::env::set_current_dir;
+
 use clap::Parser;
 use eyre::Result;
-
-use std::env::set_current_dir;
 
 use crate::{
     cli::{Opts, Subcommand},

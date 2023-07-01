@@ -1,9 +1,9 @@
-use eyre::{eyre, Result};
-
 use std::{
     ffi::{OsStr, OsString},
     process::{Command, Output},
 };
+
+use eyre::{eyre, Result};
 
 use crate::{cfg::Config, cli::Opts};
 

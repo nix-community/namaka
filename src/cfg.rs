@@ -1,7 +1,7 @@
+use std::{env::set_current_dir, fs::File, io::Read, path::PathBuf};
+
 use eyre::Result;
 use serde::Deserialize;
-
-use std::{env::set_current_dir, fs::File, io::Read, path::PathBuf};
 
 #[derive(Deserialize)]
 pub struct Config {

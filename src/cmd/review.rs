@@ -1,14 +1,14 @@
-use dialoguer::{theme::ColorfulTheme, Select};
-use eyre::{eyre, Result};
-use owo_colors::OwoColorize;
-use similar::{ChangeTag, TextDiff};
-
 use std::{
     ffi::OsStr,
     fs::{read_dir, remove_file, rename, File},
     io::{stderr, BufRead, Write},
     path::Path,
 };
+
+use dialoguer::{theme::ColorfulTheme, Select};
+use eyre::{eyre, Result};
+use owo_colors::OwoColorize;
+use similar::{ChangeTag, TextDiff};
 
 use crate::{
     cfg::Config,

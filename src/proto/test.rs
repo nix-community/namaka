@@ -1,8 +1,8 @@
+use std::path::PathBuf;
+
 use monostate::MustBe;
 use rustc_hash::FxHashMap;
 use serde::Deserialize;
-
-use std::path::PathBuf;
 
 use crate::proto::Snapshot;
 

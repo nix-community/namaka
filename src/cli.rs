@@ -1,6 +1,6 @@
-use clap::Parser;
-
 use std::{ffi::OsString, path::PathBuf};
+
+use clap::Parser;
 
 /// Snapshot testing for Nix based on haumea
 /// https://github.com/nix-community/namaka
