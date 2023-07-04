@@ -698,9 +698,9 @@ dependencies = [
 
 [[package]]
 name = "monostate"
-version = "0.1.6"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0230b703f1ac35df1e24f6d0d2255472bcccaf657ecdfa4f1fcbcad1ad5bb98a"
+checksum = "d8b39da4836f73aeb501732b1f9b614fc1610d7a289081d544f113f6238405f7"
 dependencies = [
  "monostate-impl",
  "serde",
@@ -708,9 +708,9 @@ dependencies = [
 
 [[package]]
 name = "monostate-impl"
-version = "0.1.6"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8795add3e14028f11f8e848bd3294898a8294767b3776b6f733560d33bd2530b"
+checksum = "f792cd1237b6596c82d4bb67028127c93af5c6dd86b3dc411b759a7504ecd1ab"
 dependencies = [
  "proc-macro2",
  "quote",
