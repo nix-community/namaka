@@ -1,11 +1,11 @@
 {
   inputs = {
     haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
+      url = "https://flakehub.com/f/nix-community/haumea/0.2.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     namaka = {
-      url = "github:nix-community/namaka/v0.2.0";
+      url = "https://flakehub.com/f/nix-community/namaka/0.2.tar.gz";
       inputs = {
         haumea.follows = "haumea";
         nixpkgs.follows = "nixpkgs";
