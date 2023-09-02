@@ -21,8 +21,8 @@ pub fn check(opts: Opts, cfg: Option<Config>) -> Result<()> {
     for line in output.stderr.lines() {
         let line = line?;
         let Some(line) = line.strip_prefix("trace: namaka=") else {
-                continue;
-            };
+            continue;
+        };
 
         let output = serde_json::from_str::<TestOutput>(line)?;
 
