@@ -1,7 +1,7 @@
 {
   inputs = {
     haumea = {
-      url = "https://flakehub.com/f/nix-community/haumea/0.2.tar.gz";
+      url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nix-community/nixpkgs.lib";

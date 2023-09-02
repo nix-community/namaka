@@ -7,15 +7,18 @@
         ]
       },
       "locked": {
+        "lastModified": 1685133229,
         "narHash": "sha256-FePm/Gi9PBSNwiDFq3N+DWdfxFq0UKsVVTJS3cQPn94=",
+        "owner": "nix-community",
+        "repo": "haumea",
         "rev": "34dd58385092a23018748b50f9b23de6266dffc2",
-        "revCount": 53,
-        "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/nix-community/haumea/0.2.2/0189dfd6-5068-7a4f-9aba-705d0c9c9181/source.tar.gz"
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://flakehub.com/f/nix-community/haumea/0.2.tar.gz"
+        "owner": "nix-community",
+        "ref": "v0.2.2",
+        "repo": "haumea",
+        "type": "github"
       }
     },
     "nixpkgs": {
