@@ -1,6 +1,7 @@
 use std::{
     fs::{self, create_dir_all, remove_dir_all, File},
     io::{stderr, BufRead, Write},
+    path::Path,
     process::exit,
 };
 
@@ -14,7 +15,7 @@ use crate::{
     proto::{TestOutput, TestResult},
 };
 
-pub fn check(opts: Opts, cfg: Option<Config>) -> Result<()> {
+pub fn check(root: &Path, opts: Opts, cfg: Option<Config>) -> Result<()> {
     let output = nix_check(opts, cfg)?;
     let success = output.status.success();
 
@@ -26,7 +27,7 @@ pub fn check(opts: Opts, cfg: Option<Config>) -> Result<()> {
 
         let output = serde_json::from_str::<TestOutput>(line)?;
 
-        let pending = output.dir.join("_snapshots").join(".pending");
+        let pending = root.join(output.dir).join("_snapshots/.pending");
         let _ = remove_dir_all(&pending);
         create_dir_all(&pending)?;
         fs::write(pending.join(".gitignore"), "*")?;
