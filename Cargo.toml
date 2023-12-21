@@ -17,7 +17,7 @@ color-eyre = "0.6.2"
 dialoguer = "0.11.0"
 eyre = "0.6.9"
 monostate = "0.1.10"
-owo-colors = "3.5.0"
+owo-colors = "4.0.0"
 rustc-hash = "1.1.0"
 serde = { version = "1.0.193", features = ["derive"] }
 serde_json = "1.0.108"
