@@ -17,7 +17,7 @@ use crate::{
     proto::{Snapshot, TestOutput},
 };
 
-pub fn review(opts: Opts, cfg: Option<Config>) -> Result<()> {
+pub fn review(root: &Path, opts: Opts, cfg: Option<Config>) -> Result<()> {
     let output = nix_eval(opts, cfg)?;
 
     for line in output.stderr.lines() {
@@ -27,7 +27,7 @@ pub fn review(opts: Opts, cfg: Option<Config>) -> Result<()> {
         };
 
         let output = serde_json::from_str::<TestOutput>(line)?;
-        let snapshots = output.dir.join("_snapshots");
+        let snapshots = root.join(output.dir).join("_snapshots");
 
         for entry in read_dir(snapshots.join(".pending"))? {
             use bstr::ByteSlice;
