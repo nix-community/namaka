@@ -22,7 +22,7 @@ rustc-hash = "1.1.0"
 serde = { version = "1.0.197", features = ["derive"] }
 serde_json = "1.0.114"
 similar = { version = "2.4.0", features = ["unicode"] }
-toml = "0.8.10"
+toml = "0.8.12"
 
 [dependencies.bat]
 version = "0.24.0"
