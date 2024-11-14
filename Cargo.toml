@@ -12,17 +12,17 @@ keywords = ["assert", "cli", "nix", "snapshot", "testing"]
 categories = ["command-line-utilities", "development-tools::testing"]
 
 [dependencies]
-bstr = "1.9.1"
-color-eyre = "0.6.2"
+bstr = "1.11.0"
+color-eyre = "0.6.3"
 dialoguer = "0.11.0"
 eyre = "0.6.12"
-monostate = "0.1.11"
-owo-colors = "4.0.0"
-rustc-hash = "1.1.0"
-serde = { version = "1.0.197", features = ["derive"] }
-serde_json = "1.0.114"
-similar = { version = "2.4.0", features = ["unicode"] }
-toml = "0.8.13"
+monostate = "0.1.13"
+owo-colors = "4.1.0"
+rustc-hash = "2.0.0"
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = "1.0.132"
+similar = { version = "2.6.0", features = ["unicode"] }
+toml = "0.8.19"
 
 [dependencies.bat]
 version = "0.24.0"
@@ -30,13 +30,13 @@ default-features = false
 features = ["regex-onig"]
 
 [dependencies.clap]
-version = "4.4.18"
+version = "4.5.21"
 features = ["cargo", "derive", "unicode", "wrap_help"]
 
 [build-dependencies]
-clap = { version = "4.4.18", features = ["derive", "string"] }
-clap_complete = "4.4.10"
-clap_mangen = "0.2.19"
+clap = { version = "4.5.21", features = ["derive", "string"] }
+clap_complete = "4.5.38"
+clap_mangen = "0.2.24"
 
 [profile.release]
 lto = true
