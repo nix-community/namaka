@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.1 - 2024-11-16
+
+### Fixes
+
+- review: reset the terminal when interrupted
+
 ## v0.2.0 - 2023-06-02
 
 ### Breaking Changes

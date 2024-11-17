@@ -5,7 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     namaka = {
-      url = "github:nix-community/namaka/v0.2.0";
+      url = "github:nix-community/namaka/v0.2.1";
       inputs = {
         haumea.follows = "haumea";
         nixpkgs.follows = "nixpkgs";

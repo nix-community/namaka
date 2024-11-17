@@ -6,7 +6,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     namaka = {
-      url = "github:nix-community/namaka/v0.2.0";
+      url = "github:nix-community/namaka/v0.2.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
