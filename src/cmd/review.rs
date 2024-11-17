@@ -1,11 +1,14 @@
 use std::{
     ffi::OsStr,
     fs::{read_dir, remove_file, rename, File},
-    io::{stderr, BufRead, Write},
+    io::{self, stderr, BufRead, Write},
     path::Path,
+    process::exit,
+    thread::sleep,
+    time::Duration,
 };
 
-use dialoguer::{theme::ColorfulTheme, Select};
+use dialoguer::{console::Term, theme::ColorfulTheme, Select};
 use eyre::{eyre, Result};
 use owo_colors::OwoColorize;
 use similar::{ChangeTag, TextDiff};
@@ -19,6 +22,12 @@ use crate::{
 
 pub fn review(opts: Opts, cfg: Option<Config>) -> Result<()> {
     let output = nix_eval(opts, cfg)?;
+    let _ = ctrlc::set_handler(|| {
+        let mut term = Term::stderr();
+        let _ = term.show_cursor();
+        let _ = writeln!(term, "interrupted");
+        exit(0);
+    });
 
     for line in output.stderr.lines() {
         let line = line?;
@@ -115,7 +124,14 @@ fn ask(name: &OsStr, old: &Path, new: &Path) -> Result<()> {
         .item("skip".blue())
         .default(0)
         .with_prompt(format!("Review {}", name.to_string_lossy()))
-        .interact()?;
+        .interact()
+        .inspect_err(|dialoguer::Error::IO(e)| {
+            if e.kind() == io::ErrorKind::Interrupted {
+                // make sure ctrlc handler has reset the terminal
+                sleep(Duration::from_millis(16));
+                exit(0);
+            }
+        })?;
 
     match choice {
         0 => rename(new, old).map_err(Into::into),
