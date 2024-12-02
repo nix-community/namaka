@@ -19,7 +19,7 @@ dialoguer = "0.11.0"
 eyre = "0.6.12"
 monostate = "0.1.13"
 owo-colors = "4.1.0"
-rustc-hash = "2.0.0"
+rustc-hash = "2.1.0"
 serde = { version = "1.0.215", features = ["derive"] }
 serde_json = "1.0.132"
 similar = { version = "2.6.0", features = ["unicode"] }
