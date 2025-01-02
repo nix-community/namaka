@@ -12,7 +12,7 @@ keywords = ["assert", "cli", "nix", "snapshot", "testing"]
 categories = ["command-line-utilities", "development-tools::testing"]
 
 [dependencies]
-bstr = "1.11.0"
+bstr = "1.11.2"
 color-eyre = "0.6.3"
 ctrlc = "3.4.5"
 dialoguer = "0.11.0"
