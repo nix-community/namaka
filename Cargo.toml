@@ -31,11 +31,11 @@ default-features = false
 features = ["regex-onig"]
 
 [dependencies.clap]
-version = "4.5.21"
+version = "4.5.26"
 features = ["cargo", "derive", "unicode", "wrap_help"]
 
 [build-dependencies]
-clap = { version = "4.5.21", features = ["derive", "string"] }
+clap = { version = "4.5.26", features = ["derive", "string"] }
 clap_complete = "4.5.38"
 clap_mangen = "0.2.24"
 
