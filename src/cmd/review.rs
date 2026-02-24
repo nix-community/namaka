@@ -11,7 +11,7 @@ use std::{
 use dialoguer::{console::Term, theme::ColorfulTheme, Select};
 use eyre::{eyre, Result};
 use owo_colors::OwoColorize;
-use similar::{ChangeTag, TextDiff};
+use similar::{Algorithm, ChangeTag, TextDiff};
 
 use crate::{
     cfg::Config,
@@ -94,7 +94,7 @@ pub fn review(opts: Opts, cfg: Option<Config>) -> Result<()> {
 }
 
 fn print_diff(fmt: &'static str, old: &str, new: &str) -> Result<()> {
-    let diff = TextDiff::from_graphemes(old, new);
+    let diff = TextDiff::configure().algorithm(Algorithm::Patience).diff_lines(old, new);
     for change in diff.iter_all_changes() {
         let tag = change.tag();
         let change = change.to_string_lossy();
