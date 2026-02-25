@@ -26,7 +26,7 @@ similar = { version = "2.7.0", features = ["unicode"] }
 toml = "1.0.3"
 
 [dependencies.bat]
-version = "0.25.0"
+version = "0.26.1"
 default-features = false
 features = ["regex-onig"]
 
