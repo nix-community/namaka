@@ -1,5 +1,6 @@
 use std::{
     fs::{read_dir, remove_dir_all, remove_file},
+    path::Path,
     io::{stderr, BufRead, Write},
 };
 
@@ -8,7 +9,7 @@ use owo_colors::OwoColorize;
 
 use crate::{cfg::Config, cli::Opts, cmd::run::nix_eval, proto::TestOutput};
 
-pub fn clean(opts: Opts, cfg: Option<Config>) -> Result<()> {
+pub fn clean(root: &Path, opts: Opts, cfg: Option<Config>) -> Result<()> {
     let output = nix_eval(opts, cfg)?;
 
     for line in output.stderr.lines() {
@@ -19,7 +20,7 @@ pub fn clean(opts: Opts, cfg: Option<Config>) -> Result<()> {
 
         let mut out = stderr().lock();
         let output = serde_json::from_str::<TestOutput>(line)?;
-        let snapshots = output.dir.join("_snapshots");
+        let snapshots = root.join(output.dir).join("_snapshots");
 
         for entry in read_dir(snapshots)? {
             let entry = entry?;

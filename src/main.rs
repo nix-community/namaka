@@ -23,9 +23,22 @@ fn main() -> Result<()> {
 
     let cfg = cfg::load()?;
 
+    let root = repo_root()?;
+
     match opts.subcmd {
-        Subcommand::Check => check(opts, cfg),
-        Subcommand::Clean => clean(opts, cfg),
-        Subcommand::Review => review(opts, cfg),
+        Subcommand::Check => check(&root, opts, cfg),
+        Subcommand::Clean => clean(&root, opts, cfg),
+        Subcommand::Review => review(&root, opts, cfg),
     }
+}
+
+fn repo_root() -> Result<std::path::PathBuf> {
+    let mut cmd = std::process::Command::new("git");
+    cmd.args(["rev-parse", "--show-toplevel"]);
+
+    let out = cmd.output()?;
+    let str = std::str::from_utf8(&out.stdout)?;
+    let str = str.trim_end();
+
+    Ok(str.to_owned().into())
 }
