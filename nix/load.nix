@@ -32,12 +32,12 @@ let
   src = toString (
     if args ? src then
       args.src
-    else if args ? flake then
+    else if args ? flake || args ? dir then
       warn
         "namaka.load: `flake` and `dir` have been deprecated, use `src` directly instead"
         (args.flake + "/${args.dir or "tests"}")
     else
-      throw "namaka.load: missing mandatory `src' argument"
+      throw "namaka.load: missing mandatory `src` argument"
   );
 
   tests = haumea.load (removeAttrs args [ "flake" "dir" ] // {
